@@ -3,12 +3,18 @@ import sqlite3
 from dataclasses import dataclass
 import networkx as nx
 from typing import Type
+from smart_slugify import slugify
+from networkx.readwrite import json_graph
 
 
 @dataclass
 class GraphModel:
     graph_id: str
     graph: nx.Graph
+
+    @staticmethod
+    def make_id(name: str) -> str:
+        return f"graph::{slugify(name)}"
 
     @classmethod
     def create(cls: Type["GraphModel"], graph_id: str, directed: bool = False) -> "GraphModel":
@@ -59,6 +65,15 @@ class GraphModel:
 
     def clear(self) -> None:
         self.graph.clear()
+
+    def to_json(self) -> None:
+        return {
+            "graph_id": self.graph_id,
+            "graph": json_graph.node_link_data(self.graph)
+        }
+
+    def g_json(self) -> None:
+        return json_graph.node_link_data(self.graph)
 
     @staticmethod
     def init_db(conn: sqlite3.Connection) -> None:
