@@ -601,14 +601,11 @@ class DocumentModel:
                 continue
 
             if isinstance(elem, ParagraphModel) and not elem.is_caption:
-                label = (
-                    getattr(elem, "index_number", None)
-                    or f"Paragraph {elem.id}"
-                )
+                label = elem.to_text().strip()[:30]
 
                 node = IndexItem(
                     id=elem.id,
-                    label=str(label),
+                    label=f'{label}{"..." if len(label) == 30 else ""}',
                     index=IndexType.PARA,
                     child=[],
                 )
