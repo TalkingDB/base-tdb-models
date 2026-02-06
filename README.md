@@ -1,2 +1,3 @@
 # About
-Core data models shared across TalkingDB components.
+
+Shared domain models for TalkingDB ecosystem
