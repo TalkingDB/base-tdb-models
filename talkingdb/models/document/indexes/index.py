@@ -10,6 +10,7 @@ class IndexType(str, Enum):
     TABLE = "table@full"
     TABLE_ROW = "table@row"
     TABLE_CELL = "table@cell"
+    TABLE_HEADER = "table@header"
 
 
 class IndexItem(BaseModel):

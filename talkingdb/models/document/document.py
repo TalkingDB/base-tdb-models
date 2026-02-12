@@ -92,6 +92,49 @@ class DocumentModel:
             for elem in layout.elements:
                 yield elem
 
+    def iter_elements_chain(self, non_empty: bool = True):
+        elements = [
+            elem
+            for layout in self.layouts
+            for elem in layout.elements
+        ]
+
+        if not elements:
+            return
+
+        if not non_empty:
+            prev_elem = None
+            for i, current in enumerate(elements):
+                next_elem = elements[i + 1] if i + 1 < len(elements) else None
+                yield (prev_elem, current, next_elem)
+                prev_elem = current
+            return
+
+        # -------- helper --------
+        def is_non_empty(elem) -> bool:
+            if not hasattr(elem, "to_text"):
+                return True
+            text = elem.to_text()
+            return bool(text and text.strip())
+
+        # -------- Pass 1: build next_non_empty list (minimal state) --------
+        next_list = [None] * len(elements)
+        next_seen = None
+
+        for i in range(len(elements) - 1, -1, -1):
+            next_list[i] = next_seen
+            if is_non_empty(elements[i]):
+                next_seen = elements[i]
+
+        # -------- Pass 2: forward yield with rolling prev --------
+        prev_seen = None
+
+        for i, current in enumerate(elements):
+            yield (prev_seen, current, next_list[i])
+
+            if is_non_empty(current):
+                prev_seen = current
+
     def _index_element(self, elem):
         if getattr(elem, "id", None):
             self._element_index[elem.id] = elem
@@ -195,7 +238,7 @@ class DocumentModel:
         last_heading_id: Optional[str] = None
         last_caption_id: Optional[str] = None
 
-        for elem in self.iter_elements():
+        for prev_elem, elem, next_elem in self.iter_elements_chain():
 
             # -------------------------
             # PARAGRAPHS
@@ -203,6 +246,15 @@ class DocumentModel:
             if isinstance(elem, ParagraphModel):
 
                 kind, level = elem.style.classify_style()
+
+                # -------- CAPTION --------
+                if kind == "caption" or (elem.to_text().lower().startswith(("table ")) and isinstance(next_elem, TableModel)):
+                    elem.is_caption = True
+                    elem.parent_ref_id = last_heading_id
+                    last_caption_id = elem.id
+                    if kind != "caption":
+                        elem.style.name = "caption"
+                    continue
 
                 # -------- HEADING --------
                 if kind == "heading" and level:
@@ -228,13 +280,6 @@ class DocumentModel:
 
                     last_heading_id = elem.id
                     last_caption_id = None
-                    continue
-
-                # -------- CAPTION --------
-                if kind == "caption":
-                    elem.is_caption = True
-                    elem.parent_ref_id = last_heading_id
-                    last_caption_id = elem.id
                     continue
 
                 intent = elem.classify_intent()
@@ -577,7 +622,7 @@ class DocumentModel:
             path.append(heading_text)
         return path
 
-    def build_index(self, file_name) -> FileIndexModel:
+    def build_index(self) -> FileIndexModel:
         node_map: dict[str, IndexItem] = {}
         roots: list[IndexItem] = []
 
@@ -637,6 +682,6 @@ class DocumentModel:
 
         return FileIndexModel(
             id=self.id,
-            filename=file_name,
+            filename=self.filename,
             nodes=roots,
         )
