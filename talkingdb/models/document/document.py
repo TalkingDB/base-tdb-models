@@ -13,7 +13,7 @@ from .layouts.layout import FooterModel
 from .layouts.layout import LayoutModel
 from .elements.primitive.table import TableModel
 from .elements.primitive.table import TableCellModel
-from .elements.primitive.paragraph import ParagraphModel
+from .elements.primitive.paragraph import ParagraphModel, ParagraphStyleModel
 from .placeholders.placeholder import PlaceholderModel
 from .placeholders.placeholder import PlaceholderStatus
 from .mutations import ElementReplacement
@@ -252,8 +252,11 @@ class DocumentModel:
                     elem.is_caption = True
                     elem.parent_ref_id = last_heading_id
                     last_caption_id = elem.id
-                    if kind != "caption" and elem.style:
-                        elem.style.name = "caption"
+                    if kind != "caption":
+                        if not elem.style:
+                            elem.style = ParagraphStyleModel(name="caption")
+                        else:
+                            elem.style.name = "caption"
                     continue
 
                 # -------- HEADING --------
