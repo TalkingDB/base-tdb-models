@@ -245,14 +245,14 @@ class DocumentModel:
             # -------------------------
             if isinstance(elem, ParagraphModel):
 
-                kind, level = elem.style.classify_style()
+                kind, level = elem.style.classify_style() if elem.style else (None, None)
 
                 # -------- CAPTION --------
                 if kind == "caption" or (elem.to_text().lower().startswith(("table ")) and isinstance(next_elem, TableModel)):
                     elem.is_caption = True
                     elem.parent_ref_id = last_heading_id
                     last_caption_id = elem.id
-                    if kind != "caption":
+                    if kind != "caption" and elem.style:
                         elem.style.name = "caption"
                     continue
 
