@@ -1,6 +1,6 @@
 # About
 
-Shared domain models for TalkingDB ecosystem
+Shared domain models for TalkingDB ecosystem.
 
 ## Code Contributor
 
