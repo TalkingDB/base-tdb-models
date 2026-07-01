@@ -27,6 +27,11 @@ class SignupRequest(BaseModel):
             raise ValueError(
                 "Password must contain at least one number"
             )
+        
+        if not re.search(r"[^A-Za-z0-9]", value):
+            raise ValueError(
+                "Password must contain at least one special character"
+            )
 
         return value
 

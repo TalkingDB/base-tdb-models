@@ -39,8 +39,6 @@ class UserModel(BaseModel):
         existing = cls.find_by_email(conn, email)
 
         if existing:
-            print("existing")
-            print(existing)
             raise ValueError(
                 "An account already exists with this email"
             )
@@ -91,11 +89,11 @@ class UserModel(BaseModel):
         )
 
     def save(self, conn: sqlite3.Connection) -> None:
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now(timezone.utc)
 
         conn.execute(
             """
-            INSERT OR REPLACE INTO users (
+            INSERT INTO users (
                 email,
                 password_hash,
                 is_verified,
