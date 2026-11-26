@@ -19,7 +19,7 @@ In words: knowledge models describe what TalkingDB knows, document models descri
 
 | Folder | Main class | What it holds | Saved to |
 | :--- | :--- | :--- | :--- |
-| [`entity/`](../talkingdb/models/entity/entity.py) | `EntityModel` | Entities (label plus [surface texts](https://github.com/TalkingDB/ConceptDigger/blob/main/docs/concepts.md#surface-texts-every-name-for-a-thing)) as graph nodes, facts as typed edges, and a reverse index from surface text to entity | `entities`, `facts` |
+| [`entity/`](../talkingdb/models/entity/entity.py) | `EntityModel` | Entities (label plus [surface texts](https://github.com/TalkingDB/ConceptDigger/blob/master/docs/concepts.md#surface-texts-every-name-for-a-thing)) as graph nodes, facts as typed edges, and a reverse index from surface text to entity | `entities`, `facts` |
 | [`graph/`](../talkingdb/models/graph/graph.py) | `GraphModel` | A plain directed or undirected graph with JSON attributes on nodes and edges | `nodes`, `edges` |
 | [`dictionary/`](../talkingdb/models/dictionary/dictionary.py) | `DictionaryModel` | Word frequencies, suggestions and delete variants used for fuzzy spelling correction | `metadata`, `words`, `deletes` |
 | [`rule/`](../talkingdb/models/rule/regex.py) | `RegexModel` | Case insensitive regular expression rules grouped by the entity they belong to | `regex_rules` |

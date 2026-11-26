@@ -6,6 +6,11 @@ The shared data shapes that every TalkingDB Python service imports: entities and
 ![Python 3.12 or 3.13](https://img.shields.io/badge/python-3.12%20%7C%203.13-3776AB)
 ![Import path: talkingdb.models](https://img.shields.io/badge/import-talkingdb.models-555)
 
+<p align="center">
+  <img src="docs/images/demo.gif" alt="A short animated tour of base-tdb-models: what it is, how to start, and which page to read next">
+</p>
+<p align="center"><sub>A short tour: what it is, how to start, and what to read next.</sub></p>
+
 | Start here | Go deeper |
 | :--- | :--- |
 | [What it is](#what-it-is) | [Architecture: every model and the tables it writes](docs/architecture.md) |
@@ -19,7 +24,7 @@ All pages: [docs/](docs/README.md).
 
 A **model** here is a Python class that describes the shape of one kind of data and, for most models, how that data is saved to and loaded from [SQLite](https://www.sqlite.org/about.html) (a database stored in a single file). This package holds no service and no API. It is a library that the other TalkingDB repositories install and import as `talkingdb.models`.
 
-The most important model is [`EntityModel`](talkingdb/models/entity/entity.py). An **entity** is one thing TalkingDB knows about, such as "hex nut". Each entity has a **label** (its proper name) and a list of **[surface texts](https://github.com/TalkingDB/ConceptDigger/blob/main/docs/concepts.md#surface-texts-every-name-for-a-thing)**: every way a person might write it ("hex nut", "hexagon nut"). The surface text list is where TalkingDB keeps synonyms. A **fact** is a typed link between two entities, such as `hex nut subclass_of nut`.
+The most important model is [`EntityModel`](talkingdb/models/entity/entity.py). An **entity** is one thing TalkingDB knows about, such as "hex nut". Each entity has a **label** (its proper name) and a list of **[surface texts](https://github.com/TalkingDB/ConceptDigger/blob/master/docs/concepts.md#surface-texts-every-name-for-a-thing)**: every way a person might write it ("hex nut", "hexagon nut"). The surface text list is where TalkingDB keeps synonyms. A **fact** is a typed link between two entities, such as `hex nut subclass_of nut`.
 
 ## Where this fits
 
@@ -98,6 +103,12 @@ The lookup ignores case and outer spaces. Saving to SQLite and loading back is s
 ## Code contributor
 
 mayank.g@smarter.codes
+
+## Support TalkingDB
+
+If base-tdb-models saved you time, please [give it a star](https://github.com/TalkingDB/base-tdb-models) ⭐. Stars help other developers find the project.
+
+Found a bug, or a document it gets wrong? [Open an issue](https://github.com/TalkingDB/base-tdb-models/issues/new). We are always here to help and open to a conversation. Explore the TalkingDB applications at [talkingdb.io](https://talkingdb.io/#applications).
 
 ## License
 

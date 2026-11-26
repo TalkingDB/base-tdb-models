@@ -47,7 +47,7 @@ Output:
 <sub>Screenshot of the real command and its unedited output, 25 Nov 2026.</sub>
 
 > [!TIP]
-> [Surface texts](https://github.com/TalkingDB/ConceptDigger/blob/main/docs/concepts.md#surface-texts-every-name-for-a-thing) are stored exactly as given, so `"HEX NUT "` sits next to `"hex nut"` as a separate string. Lookups ignore case and outer spaces, so both find the same entity. Normalise before you add if you want a clean list.
+> [Surface texts](https://github.com/TalkingDB/ConceptDigger/blob/master/docs/concepts.md#surface-texts-every-name-for-a-thing) are stored exactly as given, so `"HEX NUT "` sits next to `"hex nut"` as a separate string. Lookups ignore case and outer spaces, so both find the same entity. Normalise before you add if you want a clean list.
 
 ## Save and load an entity graph
 
