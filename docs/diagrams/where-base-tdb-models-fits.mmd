@@ -1,0 +1,15 @@
+flowchart LR
+    accTitle: Where base-tdb-models fits
+    accDescr: base-tdb-models is imported by base-tdb-helpers and by every TalkingDB package and module. It depends on nothing else in TalkingDB.
+    M["base-tdb-models<br>(data shapes)"]:::here
+    H["base-tdb-helpers<br>(stores, auth, jobs)"]
+    C["base-tdb-clients<br>(SQLite, MinIO, logging)"]
+    P["package-* services<br>(NEL, parse-tree, search)"]
+    T["module-* products<br>(TTT, ecommerce AI)"]
+    M --> H
+    M --> P
+    M --> T
+    C --> H
+    H --> P
+    H --> T
+    classDef here stroke-width:3px

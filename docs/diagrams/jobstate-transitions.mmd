@@ -1,0 +1,13 @@
+stateDiagram-v2
+    accTitle: JobState transitions
+    accDescr: A queued job starts and becomes ongoing, then completes or fails. A queued job can be cancelled at once; an ongoing job moves to cancelling and the worker finishes the cancel. A failed job can be queued again while retries remain.
+    [*] --> QUEUED
+    QUEUED --> ONGOING: worker starts
+    QUEUED --> CANCELLED: cancel before start
+    ONGOING --> COMPLETED
+    ONGOING --> FAILED
+    ONGOING --> CANCELLING: cancel requested
+    CANCELLING --> CANCELLED: worker finalizes
+    FAILED --> QUEUED: retry, if retries remain
+    COMPLETED --> [*]
+    CANCELLED --> [*]

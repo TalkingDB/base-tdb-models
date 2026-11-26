@@ -1,0 +1,25 @@
+flowchart TB
+    accTitle: Model groups in base-tdb-models
+    accDescr: Four groups of models. Knowledge models hold entities, facts, dictionaries and regex rules. Document models hold parsed documents and their index. Processing models track jobs, events and failures. Access models hold users, API keys and request metadata.
+    subgraph K["Knowledge"]
+        E["EntityModel<br>entities + facts"]
+        D["DictionaryModel<br>words for spelling correction"]
+        R["RegexModel<br>pattern rules"]
+        G["GraphModel<br>generic graph"]
+    end
+    subgraph DOC["Documents"]
+        DM["DocumentModel"]
+        EL["Paragraph, Table,<br>Header, Footer"]
+        IX["FileIndexModel<br>heading outline"]
+    end
+    subgraph P["Processing"]
+        J["JobModel<br>state + stage"]
+        EV["EventModel"]
+        F["DocumentFailure"]
+    end
+    subgraph A["Access"]
+        U["UserModel, APIKeyModel"]
+        MD["Metadata"]
+    end
+    DM --> EL
+    DM --> IX
