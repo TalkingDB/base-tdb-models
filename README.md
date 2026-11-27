@@ -7,9 +7,9 @@ The shared data shapes that every TalkingDB Python service imports: entities and
 ![Import path: talkingdb.models](https://img.shields.io/badge/import-talkingdb.models-555)
 
 <p align="center">
-  <img src="docs/images/demo.gif" alt="A short animated tour of base-tdb-models: what it is, how to start, and which page to read next">
+  <img src="docs/images/demo.gif" alt="Animated demo of a real run: EntityModel finds hex_nut for '  Hexagon Nut' and 'HEX NUT', flange_nut for 'flanged nut', nut for 'nuts', and nothing for 'wing nut'; then the entities and facts tables it saved in SQLite">
 </p>
-<p align="center"><sub>A short tour: what it is, how to start, and what to read next.</sub></p>
+<p align="center"><sub>A real run at <code>21ef180</code> on 27 Nov 2026.</sub></p>
 
 | Start here | Go deeper |
 | :--- | :--- |
