@@ -1,0 +1,18 @@
+erDiagram
+    accTitle: SQLite tables written by EntityModel
+    accDescr: One entity graph id owns many rows in entities and many rows in facts. Each fact joins a source node to a target node.
+    ENTITIES {
+        text entity_id PK
+        text node_id PK
+        text label
+        text surface_texts "JSON list"
+    }
+    FACTS {
+        text entity_id PK
+        text fact_id PK
+        text source
+        text target
+        text predicate
+        text attributes "JSON object"
+    }
+    ENTITIES ||--o{ FACTS : "source or target"
